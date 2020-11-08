@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Customer(models.Model):
 
 	def __str__(self):
@@ -40,6 +41,10 @@ class Product(models.Model):
 
 
 
+
+
+
+
 class Order(models.Model):
 
 	def __str__(self):
@@ -53,3 +58,14 @@ class Order(models.Model):
 	date_created = models.DateTimeField(auto_now_add=True, null=True)
 	status = models.CharField(max_length=200, null=True, choices=STATUS)
 	note = models.CharField(max_length=1000, null=True)
+
+
+
+class Profile(models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
+	first_name = models.CharField(max_length=200, null=True, blank=True)
+	last_name = models.CharField(max_length=200, null=True, blank=True)
+	phone = models.CharField(max_length=200, null=True, blank=True)
+
+	def __str__(self):
+		return str(self.user)
